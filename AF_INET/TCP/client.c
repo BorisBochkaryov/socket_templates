@@ -10,12 +10,11 @@
 
 int main(){
   struct sockaddr_in server;
-  struct hostent *host;
-  host = gethostbyname("0.0.0.0"); // переводим из строки в адрес
   // структура для сокета
-  strcpy((char*)&server.sin_addr.s_addr, (char*)host->h_addr); // адрес сервера
   server.sin_family = AF_INET;
   server.sin_port = htons(2015);
+  server.sin_addr.s_addr = inet_addr("127.0.0.1");
+
   // создаем сокет
   int sock;
   if((sock = socket(AF_INET, SOCK_STREAM, 0)) == -1){
